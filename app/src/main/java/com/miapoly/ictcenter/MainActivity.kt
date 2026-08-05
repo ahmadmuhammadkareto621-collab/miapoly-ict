@@ -8,35 +8,32 @@ import androidx.appcompat.app.AppCompatActivity
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        
         val layout = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
-            setPadding(80, 200, 80, 80)
+            setPadding(100, 200, 100, 100)
         }
-        
         val title = TextView(this).apply {
-            text = "MIAPOLY\nICT CENTER\nManagement System"
-            textSize = 24f
-            setPadding(0,0,100)
+            text = "MIAPOLY ICT CENTER\nManagement System"
+            textSize = 20f
         }
-        
-        val userInput = EditText(this).apply { hint = "Username (admin)" }
-        val passInput = EditText(this).apply { 
-            hint = "Password (admin123)"
+        val userInput = EditText(this).apply { hint = "Username" }
+        val passInput = EditText(this).apply {
+            hint = "Password"
             inputType = android.text.InputType.TYPE_CLASS_TEXT or android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD
         }
-        
-        val loginBtn = Button(this).apply { text = "LOGIN" }
-        val info = TextView(this).apply { text = "\nDefault: admin / admin123\nAhmad M. Kareto Project"; textSize = 12f }
-        
+        val loginBtn = Button(this).apply { text = "Login" }
+        val info = TextView(this).apply { text = "Use: admin / admin123" }
+
         loginBtn.setOnClickListener {
-            if(userInput.text.toString() == "admin" && passInput.text.toString() == "admin123") {
+            val u = userInput.text.toString()
+            val p = passInput.text.toString()
+            if (u == "admin" && p == "admin123") {
                 startActivity(Intent(this, DashboardActivity::class.java))
             } else {
-                Toast.makeText(this, "Invalid! Use admin / admin123", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Invalid login", Toast.LENGTH_SHORT).show()
             }
         }
-        
+
         layout.addView(title)
         layout.addView(userInput)
         layout.addView(passInput)
